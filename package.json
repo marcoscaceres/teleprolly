@@ -1,0 +1,41 @@
+{
+  "name": "teleprolly",
+  "description": "Implementation of the W3C Telephony API",
+  "version": "0.1.0",
+  "homepage": "https://github.com/marcoscaceres/teleprolly",
+  "author": {
+    "name": "Marcos Caceres",
+    "email": "marcos@marcosc.com",
+    "url": "http://marcosc.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/marcoscaceres/tteleprolly.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marcoscaceres/teleprolly"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/marcoscaceres/teleprolly/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/teleprolly",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "scripts": {
+    "test": "grunt nodeunit"
+  },
+  "devDependencies": {
+    "grunt-contrib-concat": "~0.1.2",
+    "grunt-contrib-uglify": "~0.1.1",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-requirejs": "~0.4.0"
+  },
+  "keywords": []
+}
