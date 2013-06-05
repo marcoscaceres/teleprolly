@@ -1,7 +1,5 @@
-'use strict';
-
 module.exports = function(grunt) {
-
+  'use strict';
   // Project configuration.
   grunt.initConfig({
     // Metadata.
@@ -11,6 +9,17 @@ module.exports = function(grunt) {
       '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+    //RequireJS
+    requirejs: {
+      compile: {
+        options: {
+          name: "test",
+          baseUrl: "lib/",
+          mainConfigFile: "lib/teleprolly.js",
+          out: "dist/optimized.js"
+        }
+      }
+    },
     // Task configuration.
     concat: {
       options: {
@@ -43,7 +52,7 @@ module.exports = function(grunt) {
       },
       lib: {
         options: {
-          jshintrc: 'lib/.jshintrc'
+          jshintrc: '.jshintrc'
         },
         src: ['lib/**/*.js']
       },
@@ -73,6 +82,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'nodeunit', 'concat', 'uglify']);

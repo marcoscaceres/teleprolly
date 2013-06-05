@@ -1,5 +1,7 @@
 {
   "curly": true,
+  "proto": true,
+  "devel": true,
   "eqeqeq": true,
   "immed": true,
   "latedef": true,
@@ -8,8 +10,10 @@
   "sub": true,
   "undef": true,
   "unused": true,
-  "boss": true,
+  "boss": false,
   "eqnull": true,
-  "node": true,
-  "es5": true
+  "browser": true,
+  "es5": true,
+  "strict": true,
+  "predef":["exports","module","window","require","define"]
 }

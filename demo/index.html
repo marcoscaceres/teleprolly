@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>Telephony API Prollyfill</title>
+<script data-main="/lib/config" src="/deps/require.min.js"></script>
+<h1>Telephony API Prolly</h1>
+<style>
+button{
+	color: white;
+	font-size: 2em;
+	width: 3em;
+	height: 3em;
+	border-radius: .3em;
+	background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%);
+}
+button.number{
+	background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
+}
+
+button.active{
+	border-style: inset; 
+}
+</style>
+
+<table id="keypad">
+	<tr>
+		<td>Hz</td>
+		<td>1209</td>
+		<td>1336</td>
+		<td>1447</td>
+		<td>1633</td>
+	</tr>
+	<tr>
+		<td>697</td>
+		<td><button value="1" class="number">1</button></td>
+		<td><button value="2" class="number">2</button></td>
+		<td><button value="3" class="number">3</button></td>
+		<td><button value="A" class="menuSelection">A</button></td>
+	</tr>
+	<tr>
+		<td>770</td>
+		<td><button value="4" class="number">4</button></td>
+		<td><button value="5" class="number">5</button></td>
+		<td><button value="6" class="number">6</button></td>
+		<td><button value="B" class="menuSelection">B</button></td>
+	</tr>
+	<tr>
+		<td>852</td>
+		<td><button value="7" class="number">7</button></td>
+		<td><button value="8" class="number">8</button></td>
+		<td><button value="9" class="number">9</button></td>
+		<td><button value="C" class="menuSelection">C</button></td>
+	</tr>
+	<tr>
+		<td>941</td>
+		<td><button value="*" class="menuSelection">*</button></td>
+		<td><button value="0" class="number">0</button></td>
+		<td><button value="#" class="menuSelection">#</button></td>
+		<td><button value="D" class="menuSelection">D</button></td>
+	</tr>	
+</table>
+
+<script>
+"use strict";
+(function(){
+	"use strict";
+	var pad = document.querySelector("#keypad"), 
+		keyPad = new KeyPad(pad);
+
+	function KeyPad(keypadContainer){
+		var activeKey = null,
+			buttons = keypadContainer.querySelectorAll("button"),
+			keys = generateKeys();
+
+		function generateKeys(){
+			var keyMap = new Map();
+			for (var button, id, i = buttons.length - 1; i >= 0; i--) {
+				button = buttons[i];
+				id = button.value.charCodeAt();
+				id = "U+00" + id.toString(16).toUpperCase(); 
+				keyMap.set(id, button);
+			};
+			return keyMap;
+		}
+		
+		window.addEventListener("keydown", function(e){
+			var key = e.which,
+				code = String.fromCharCode(key),
+				selector = "button[value='"+ code +"']",
+				button = pad.querySelector(selector);
+			//if it's a valid key, and not the current pressed one
+			if(keys.has(e.keyIdentifier)){
+				if(activeKey && key === activeKey.value.charCodeAt()){
+					return;
+				}
+				activeKey = keys.get(e.keyIdentifier);
+				activeKey.classList.toggle("active");
+				navigator.telephony.dial(button.value);
+			}
+		});
+
+		window.addEventListener("keyup", function(e){
+			var key = e.which;
+			if(activeKey && key === activeKey.value.charCodeAt()){
+				activeKey.classList.toggle("active");
+				activeKey = null;
+				//navigator.telephony.stopTone(key);
+			}
+		});
+	}
+
+}());
+</script>
