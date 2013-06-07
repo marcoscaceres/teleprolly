@@ -78,6 +78,9 @@ button.active{
 				id = button.value.charCodeAt();
 				id = "U+00" + id.toString(16).toUpperCase(); 
 				keyMap.set(id, button);
+				button.addEventListener("click", function(e){
+					navigator.telephony.dial(this.value);
+				});
 			};
 			return keyMap;
 		}
