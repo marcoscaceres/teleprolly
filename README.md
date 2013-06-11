@@ -1,41 +1,18 @@
 # teleprolly
 
-Implementation of the W3C Telephony API
+Implementation of the W3C's Web Telephony API
 
 ## Getting Started
-### On the server
-Install the module with: `npm install teleprolly`
-
-```javascript
-var teleprolly = require('teleprolly');
-teleprolly.awesome(); // "awesome"
-```
-
 ### In the browser
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/marcoscaceres/tteleprolly/master/dist/teleprolly.min.js
-[max]: https://raw.github.com/marcoscaceres/tteleprolly/master/dist/teleprolly.js
+[min]: https://raw.github.com/marcoscaceres/teleprolly/gh-pages/dist/teleprolly.min.js
+[max]: https://raw.github.com/marcoscaceres/teleprolly/gh-pages/dist/teleprolly.js
 
 In your web page:
 
 ```html
 <script src="dist/teleprolly.min.js"></script>
-<script>
-awesome(); // "awesome"
-</script>
-```
-
-In your code, you can attach teleprolly's methods to any object.
-
-```html
-<script>
-var exports = Bocoup.utils;
-</script>
-<script src="dist/teleprolly.min.js"></script>
-<script>
-Bocoup.utils.awesome(); // "awesome"
-</script>
 ```
 
 ## Documentation
