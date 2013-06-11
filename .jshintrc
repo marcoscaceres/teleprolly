@@ -13,7 +13,6 @@
   "boss": false,
   "eqnull": true,
   "browser": true,
-  "es5": true,
   "strict": true,
-  "predef":["exports","module","window","require","define"]
+  "predef":["exports","module","window","require","define", "google", "webkitAudioContext"]
 }
