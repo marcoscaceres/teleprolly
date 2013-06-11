@@ -1,6 +1,6 @@
-# teleprolly
+# teleprolly.js
 
-Implementation of the W3C's Web Telephony API
+Implementation of the W3C's [Web Telephony API](http://www.w3.org/2012/sysapps/telephony/).
 
 ## Getting Started
 ### In the browser
@@ -16,10 +16,11 @@ In your web page:
 ```
 
 ## Documentation
-_(Coming soon)_
+[See the spec](http://www.w3.org/2012/sysapps/telephony/). 
 
 ## Examples
-_(Coming soon)_
+[See the spec](http://www.w3.org/2012/sysapps/telephony/). 
+
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
