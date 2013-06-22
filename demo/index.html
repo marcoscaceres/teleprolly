@@ -33,7 +33,7 @@
 
 </style>
 
-<button id="telRegister"></button>
+<button id="telRegister">Register application as tel: handler</button>
 
 <table id="keypad">
 	<tr>
@@ -84,7 +84,7 @@
 		var url = window.location.origin + window.location.pathname +"?number=%s",
 			isRegistered = window.localStorage.telReg,
 			text = (isRegistered) ? "Unregister" : "Register"; 
-		this.innerHTML = text + " as tel: handler";
+		this.innerHTML = text + " application as tel: handler";
 		(!!this.class) ? this.class = "enabled" : ""; 
 		if(!isRegistered){
 		    window.navigator.registerProtocolHandler("tel", url, "Telephony API Dialer");
@@ -104,14 +104,16 @@
 			telNumber; 
 		if(window.navigator.registerProtocolHandler){
 			telRegButton.addEventListener("click", configureTelHandler);
-			configureTelHandler.call(telRegButton);
 		}
 		//if a number was passed
 		if(url.hasQuery("number")){
 			telNumber = new URI(url.search(true).number); 
 			if(telNumber.scheme() === "tel" && telNumber.path()){
 				if(window.confirm("Dial " + telNumber.path() + "?")){
-					navigator.telephony.dial(telNumber.path());
+					setTimeout(function(){
+						console.log("trying to dial");
+						navigator.telephony.dial(telNumber.path());
+					}, 1000);
 				};
 			}
 		}
