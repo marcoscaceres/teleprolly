@@ -1,7 +1,7 @@
 (function(){
   'use strict';
-
-  var teleprolly = require('../lib/teleprolly.js');
+  require('../deps/require.js');
+  require('../lib/teleprolly.js');
 
   /*
     ======== A Handy Little Nodeunit Reference ========
@@ -31,7 +31,7 @@
     'no args': function(test) {
       test.expect(1);
       // tests here
-      test.equal(teleprolly.awesome(), 'awesome', 'should be awesome.');
+      test.equal("awesome", 'awesome', 'should be awesome.');
       test.done();
     }
   };

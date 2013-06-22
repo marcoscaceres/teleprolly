@@ -13,10 +13,10 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: {
-          name: 'test',
+          name: 'teleprolly',
           baseUrl: 'lib/',
           mainConfigFile: 'lib/teleprolly.js',
-          out: 'dist/optimized.js'
+          out: 'dist/<%= pkg.name %>.min.js'
         }
       }
     },
@@ -78,13 +78,14 @@ module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  //grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
 
+
   // Default task.
-  grunt.registerTask('default', ['jshint', 'nodeunit', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'nodeunit', 'concat', 'requirejs']);
 
 };
