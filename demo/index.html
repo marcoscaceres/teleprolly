@@ -2,7 +2,9 @@
 <meta charset=utf-8>
 <meta name="viewport" content="width=600, initial-scale=1">
 <title>Telephony API Prollyfill</title>
-<script data-main="../lib/teleprolly" src="../deps/require.js"></script>
+<script src="js/URI.js"></script>
+<script src="../deps/require.js"></script>
+<script src="/dist/teleprolly.min.js"></script>
 <h1>Telephony API Prollyfill</h1>
 <style>
 #keypad button{
@@ -97,11 +99,22 @@
 
 	//when doc loads, check tel: registration status 
 	window.addEventListener("DOMContentLoaded", function(){
-		var telRegButton = document.querySelector("#telRegister");
+		var url = new URI(window.location),
+			telRegButton = document.querySelector("#telRegister"),
+			telNumber; 
 		if(window.navigator.registerProtocolHandler){
 			telRegButton.addEventListener("click", configureTelHandler);
 			configureTelHandler.call(telRegButton);
-		}	
+		}
+		//if a number was passed
+		if(url.hasQuery("number")){
+			telNumber = new URI(url.search(true).number); 
+			if(telNumber.scheme() === "tel" && telNumber.path()){
+				if(window.confirm("Dial " + telNumber.path() + "?")){
+					navigator.telephony.dial(telNumber.path());
+				};
+			}
+		}
 	})
 
 	function KeyPad(keypadContainer){
