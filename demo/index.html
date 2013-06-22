@@ -2,10 +2,10 @@
 <meta charset=utf-8>
 <meta name="viewport" content="width=600, initial-scale=1">
 <title>Telephony API Prollyfill</title>
-<script data-main="../lib/config" src="../deps/require.min.js"></script>
+<script data-main="../lib/teleprolly" src="../deps/require.js"></script>
 <h1>Telephony API Prollyfill</h1>
 <style>
-button{
+#keypad button{
 	color: white;
 	font-size: 2em;
 	width: 3em;
@@ -14,15 +14,24 @@ button{
 	background: #cf0404;
 	background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%);
 }
-button.number{
+#keypad button.number{
 	background: #0e0e0e;
 	background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
 }
 
-button.active{
+#keypad button.active{
 	border-style: inset; 
 }
+#telRegister{
+}
+
+#telRegister.enabled{
+	display: block;
+}
+
 </style>
+
+<button id="telRegister"></button>
 
 <table id="keypad">
 	<tr>
@@ -69,6 +78,32 @@ button.active{
 	var pad = document.querySelector("#keypad"), 
 		keyPad = new KeyPad(pad);
 
+	function configureTelHandler(){
+		var url = window.location.origin + window.location.pathname +"?number=%s",
+			isRegistered = window.localStorage.telReg,
+			text = (isRegistered) ? "Unregister" : "Register"; 
+		this.innerHTML = text + " as tel: handler";
+		(!!this.class) ? this.class = "enabled" : ""; 
+		if(!isRegistered){
+		    window.navigator.registerProtocolHandler("tel", url, "Telephony API Dialer");
+		    window.localStorage.telReg = true;
+			return;
+		}
+		if(window.navigator.unregisterProtocolHandler){
+			window.navigator.unregisterProtocolHandler("tel", url);
+			window.localStorage.telReg = false;
+		}	
+	}	
+
+	//when doc loads, check tel: registration status 
+	window.addEventListener("DOMContentLoaded", function(){
+		var telRegButton = document.querySelector("#telRegister");
+		if(window.navigator.registerProtocolHandler){
+			telRegButton.addEventListener("click", configureTelHandler);
+			configureTelHandler.call(telRegButton);
+		}	
+	})
+
 	function KeyPad(keypadContainer){
 		var activeKey = null,
 			buttons = keypadContainer.querySelectorAll("button"),
@@ -113,6 +148,5 @@ button.active{
 			}
 		});
 	}
-
 }());
 </script>
