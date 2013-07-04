@@ -1,6 +1,11 @@
 # teleprolly.js
 
-Implementation of the W3C's [Web Telephony API](http://www.w3.org/2012/sysapps/telephony/).
+This is a prototype reference implementation of the W3C's [Web Telephony API](http://www.w3.org/2012/sysapps/telephony/).
+
+## Warning
+
+**This is an unsupported component with an indefinite lifetime. This should be used for evaluation purposes 
+only and should not be used for production level applications.**
 
 ## Getting Started
 ### In the browser
